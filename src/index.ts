@@ -1,4 +1,3 @@
-import { join } from "node:path";
 import { toHiragana, isKanji } from "wanakana";
 import { tokenizerNode } from "@saeris/kuromoji";
 import type { Root } from "mdast";
@@ -24,16 +23,19 @@ const tokenMap = {
 export type PoS = Exclude<(typeof tokenMap)[keyof typeof tokenMap], null>;
 
 export interface Options {
+  /** Path to dictionaries directory (Required) */
+  dict: string;
+  /** Enable Denden Furigana Ruby syntax rendering */
   furigana?: boolean;
+  /** Parts of Speech to include in highlighting */
   include?: PoS[];
+  /** Parts of Speech to exclude in highlighting */
   exclude?: PoS[];
 }
 
 const containsKanji = (input: string): boolean => Boolean(input.split(``).find(isKanji));
 
-const tokenizer = await tokenizerNode(join(process.cwd(), `./dict`));
-
-const highlight = (value: string, options?: Options) => {
+const highlight = (value: string, tokenizer: Awaited<ReturnType<typeof tokenizerNode>>, options?: Options) => {
   const settings: Options = Object.assign(
     {
       furigana: false,
@@ -110,16 +112,17 @@ const safeParse = (meta: string | null | undefined): Record<string, unknown> => 
 };
 
 export const remarkAyaji =
-  (globalOptions?: Options) =>
-  (tree: Root): void => {
+  (globalOptions: Options) =>
+  async (tree: Root): Promise<void> => {
+    const tokenizer = await tokenizerNode(globalOptions.dict);
     visit(tree, `code`, (node, index, parent) => {
       if (node.lang === `jp` && parent && typeof index === `number`) {
-        const options = Object.assign(globalOptions ?? {}, safeParse(node.meta));
+        const options = Object.assign(globalOptions, safeParse(node.meta));
         parent.children.splice(
           index,
           1,
           // @ts-expect-error
-          ...node.value.split(/(?:\r?\n)+/).map((paragraph) => highlight(paragraph, options))
+          ...node.value.split(/(?:\r?\n)+/).map((paragraph) => highlight(paragraph, tokenizer, options))
         );
       }
     });

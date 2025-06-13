@@ -37,7 +37,9 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist/**/*"
+    "dict/*",
+    "dist/**/*",
+    "./NOTICE.md"
   ],
   "sideEffects": false,
   "scripts": {

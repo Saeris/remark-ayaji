@@ -33,12 +33,12 @@ import remarkAyaji from "@saeris/remark-ayaji";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 
-const result = remark()
+const result = await remark()
   .use(remarkParse)
-  .use(remarkAyaji /* options */)
+  .use(remarkAyaji, { dict: `path/to/dictionaries/directory/` })
   .use(remarkRehype)
   .use(rehypeStringify)
-  .processSync(markdown);
+  .process(markdown);
 
 console.log(result.tostring());
 ```
@@ -85,6 +85,7 @@ type PoS =
   | "auxiliary-verb";
 
 interface Options {
+  dict: string;
   furigana?: boolean;
   include?: PoS[];
   exclude?: PoS[];
@@ -93,6 +94,18 @@ interface Options {
 
 This plugin can be configured both globally via an options object supplied alongside where the plugin is imported and used, or locally via the code fence meta after the language attribute in a comma-separated, JSON-like syntax. Examples can be found below.
 
+### options.dict (Required, Global Only)
+
+This plugin relies on various dictionary files for the tokenizer to work. While [kuromoji][kuromoji] includes these files, they cannot automatically be loaded and must be done so manually. Depending on your environment, you may need to copy the `dict` directory of `@saeris/kuromoji` to somewhere in your project. For example, if it exists in your project root, you can configure the plugin like this:
+
+```ts
+// ...
+.use(remarkAyaji, { dict: path.join(process.cwd(), `./dict`) })
+// ...
+```
+
+These dictionary files are from the [mecab project][mecab], please see [NOTICE][notice] for license details.
+
 ### options.furigana
 
 Adds furigana to words containing kanji in the Denden Furigana markdown syntax: `{日本語|にほんご}`. By combining this plugin with [remark-denden-ruby][remark-denden-ruby], this will produce [`<ruby>`][mdn-ruby] text annotations to further aid in readability.
@@ -100,8 +113,10 @@ Adds furigana to words containing kanji in the Denden Furigana markdown syntax: 
 **global config:**
 
 ```javascript
-.use(remarkAyaji, { furigana: true })
+// ...
+.use(remarkAyaji, { dict, furigana: true })
 .use(remarkRuby) // plugin order is important!
+// ...
 ```
 
 **local config:**
@@ -190,7 +205,9 @@ Released under the [MIT][license] © [Drake Costa][personal-website]
 [npm-badge]: https://img.shields.io/npm/v/@saeris/remark-ayaji.svg?style=flat
 [remark]: https://github.com/remarkjs/remark
 [kuromoji]: https://github.com/saeris/kuromoji
+[mecab]: https://en.wikipedia.org/wiki/MeCab
+[notice]: ./NOTICE.md
 [remark-denden-ruby]: https://github.com/fabon-f/remark-denden-ruby
 [mdn-ruby]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ruby
-[license]: https://github.com/saeris/remark-ayaji/blob/master/LICENSE.md
+[license]: ./LICENSE.md
 [personal-website]: https://saeris.gg
