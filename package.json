@@ -1,6 +1,6 @@
 {
   "name": "@saeris/remark-ayaji",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Remark plugin that performs Japanese Grammar syntax highlighting in code fences.",
   "author": "Drake Costa <drake@saeris.io> (https://github.com/Saeris/)",
   "license": "MIT",
