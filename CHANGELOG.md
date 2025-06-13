@@ -1,5 +1,11 @@
 # @saeris/remark-ayaji
 
+## 1.1.0
+
+### Minor Changes
+
+- [`c4733ce`](https://github.com/Saeris/remark-ayaji/commit/c4733ce1593ac0064118970243d065b190575a6b) Thanks [@Saeris](https://github.com/Saeris)! - Add required config option `dict`, Refactor for async execution, Update usage documentation
+
 ## 1.0.0
 
 ### Major Changes
