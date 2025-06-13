@@ -199,8 +199,8 @@ Released under the [MIT][license] © [Drake Costa][personal-website]
 
 [絢]: https://jisho.org/search/%E7%B5%A2%20%23kanji
 [字]: https://jisho.org/search/%E5%AD%97%20%23kanji
-[ci]: https://github.com/saeris/remark-ayaji/actions/workflows/ci.yml
-[ci-badge]: https://github.com/Saeris/eslint-config/actions/workflows/test.yml/badge.svg
+[ci]: https://github.com/Saeris/remark-ayaji/actions/workflows/ci.yml
+[ci-badge]: https://github.com/Saeris/remark-ayaji/actions/workflows/ci.yml/badge.svg
 [npm]: https://www.npmjs.org/package/@saeris/remark-ayaji
 [npm-badge]: https://img.shields.io/npm/v/@saeris/remark-ayaji.svg?style=flat
 [remark]: https://github.com/remarkjs/remark
