@@ -55,11 +55,11 @@ import "@saeris/remark-ayaji/theme.css";
 
 Highlighting works in a similar manner to syntax highlighters for code, using code fences with a `jp` language annotation:
 
-```markdown
-\`\`\`jp
+````markdown
+```jp
 日本語が分かります。
-\`\`\`
 ```
+````
 
 This will compile to the following HTML:
 
@@ -106,11 +106,11 @@ Adds furigana to words containing kanji in the Denden Furigana markdown syntax: 
 
 **local config:**
 
-```markdown
-\`\`\`jp furigana: true
+````markdown
+```jp furigana: true
 日本語
-\`\`\`
 ```
+````
 
 **result:**
 
@@ -139,11 +139,11 @@ An array of parts of speech to include in highlighting.
 
 **local config:**
 
-```markdown
-\`\`\`jp include: ["noun"]
+````markdown
+```jp include: ["noun"]
 日本語が分かります。
-\`\`\`
 ```
+````
 
 **result:**
 
@@ -164,11 +164,11 @@ An array of parts of speech to exclude in highlighting. This will take precidenc
 
 **local config:**
 
-```markdown
-\`\`\`jp exclude: ["noun", "auxiliary-verb"]
+````markdown
+```jp exclude: ["noun", "auxiliary-verb"]
 日本語が分かります。
-\`\`\`
 ```
+````
 
 **result:**
 
