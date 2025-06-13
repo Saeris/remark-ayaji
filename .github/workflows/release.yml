@@ -11,7 +11,7 @@ permissions: {}
 
 jobs:
   release:
-    if: github.repository == 'saeris/remark-awaji'
+    if: github.repository == 'saeris/remark-ayaji'
     permissions:
       contents: write
       pull-requests: write
