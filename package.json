@@ -1,0 +1,84 @@
+{
+  "name": "@saeris/remark-ayaji",
+  "version": "0.0.0",
+  "description": "Remark plugin that performs Japanese Grammar syntax highlighting in code fences.",
+  "author": "Drake Costa <drake@saeris.io> (https://github.com/Saeris/)",
+  "license": "MIT",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saeris/remark-ayaji.git"
+  },
+  "homepage": "https://github.com/saeris/remark-ayaji#readme",
+  "bugs": {
+    "url": "https://github.com/saeris/remark-ayaji/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "engines": {
+    "node": ">=20.x"
+  },
+  "packageManager": "yarn@4.9.1",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "module": "./dist/index.js",
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "default": "./dist/index.js"
+    },
+    "./theme.css": "./dist/theme.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "ci": "yarn lint && yarn typecheck && yarn test",
+    "build": "tsdown",
+    "lint": "eslint \"./src/**/*.{j,t}s?(x)\"",
+    "format": "yarn lint --fix",
+    "release": "yarn build && changeset publish",
+    "test": "vitest --fileParallelism",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@saeris/kuromoji": "^2.0.0",
+    "json5": "^2.2.3",
+    "mdast": "^3.0.0",
+    "unist-util-visit": "^5.0.0",
+    "wanakana": "^5.3.1"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^0.5.1",
+    "@changesets/cli": "^2.29.4",
+    "@saeris/eslint-config": "^3.1.0",
+    "@types/mdast": "^4.0.4",
+    "@types/node": "^24.0.1",
+    "eslint": "9.28.0",
+    "prettier": "^3.5.3",
+    "rehype-stringify": "^10.0.1",
+    "remark": "^15.0.1",
+    "remark-rehype": "^11.1.2",
+    "tsdown": "^0.12.7",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.3"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": false,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false
+  }
+}
