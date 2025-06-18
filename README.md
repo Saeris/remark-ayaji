@@ -193,7 +193,7 @@ An array of parts of speech to exclude in highlighting. This will take precidenc
 
 ## 🥂 License
 
-Released under the [MIT][license] © [Drake Costa][personal-website]
+Released under the [MIT license][license] © [Drake Costa][personal-website]
 
 <!-- Definitions -->
 
